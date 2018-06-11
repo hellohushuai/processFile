@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iflytek.processfile.dao.CyUserMapper">
+  <resultMap id="BaseResultMap" type="com.iflytek.processfile.dto.CyUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="gender" jdbcType="CHAR" property="gender" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modificator" jdbcType="VARCHAR" property="modificator" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="user_photo" jdbcType="VARCHAR" property="userPhoto" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, del_flag, login_name, email, mobile, user_password, real_name, gender, creator, 
+    create_time, modificator, update_time, user_photo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cy_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cy_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.iflytek.processfile.dto.CyUser">
+    insert into cy_user (id, del_flag, login_name, 
+      email, mobile, user_password, 
+      real_name, gender, creator, 
+      create_time, modificator, update_time, 
+      user_photo)
+    values (#{id,jdbcType=BIGINT}, #{delFlag,jdbcType=CHAR}, #{loginName,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
+      #{realName,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modificator,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{userPhoto,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iflytek.processfile.dto.CyUser">
+    insert into cy_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="loginName != null">
+        login_name,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="userPassword != null">
+        user_password,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modificator != null">
+        modificator,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="userPhoto != null">
+        user_photo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modificator != null">
+        #{modificator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userPhoto != null">
+        #{userPhoto,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iflytek.processfile.dto.CyUser">
+    update cy_user
+    <set>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="loginName != null">
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modificator != null">
+        modificator = #{modificator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userPhoto != null">
+        user_photo = #{userPhoto,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iflytek.processfile.dto.CyUser">
+    update cy_user
+    set del_flag = #{delFlag,jdbcType=CHAR},
+      login_name = #{loginName,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modificator = #{modificator,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      user_photo = #{userPhoto,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

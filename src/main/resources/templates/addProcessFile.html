@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <!-- Title and other stuffs -->
+    <title>新增流程文件页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.css">
+    <!--引入表单校验css-->
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrapValidator.css">
+    <script src="static/js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="static/bootstrap/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+    <!--引入表单校验js-->
+    <script src="static/bootstrap/js/bootstrapValidator.js" type="text/javascript" charset="utf-8"></script>
+    <!--引入富文本编辑器的js-->
+    <script src="static/bootstrap/js/wangEditor.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<form class="form-horizontal">
+    <div class="container">
+        <div class="row" style="padding: 20px 0">
+            <div class="page-header col-lg-offset-1">
+                <h1>创建流程文件
+                    <small>Do what you want</small>
+                </h1>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="control-label col-lg-1" for="title">标题</label>
+            <div class="col-lg-5 col-md-6">
+                <input class="form-control" name="title" id="title" type="text" placeholder="title">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="control-label col-lg-1" for="type">类型</label>
+            <div class="col-lg-5 col-md-6">
+                <select class="form-control" id="type" name="type">
+                    <option value="0">主流程文件</option>
+                    <option value="1">流程文件子模块</option>
+                </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="control-label col-lg-1">内容</label>
+            <div class="col-lg-8 col-md-8" id="editor">
+            </div>
+            <!--<button id="btn1">获取html</button>-->
+            <!--<button id="btn2">获取text</button>-->
+        </div>
+
+        <div class="row form-group">
+            <div class="col-lg-5 col-md-6 col-lg-offset-1 col-md-offset-1">
+            <span class="help-block">请确定已经按照规定的格式填写完成</span>
+            <label class="checkbox">
+                <input type="checkbox"/> 勾选同意
+            </label>
+            <a id="submit" class="btn">提交</a>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    var E = window.wangEditor;
+    var editor = new E('#editor');
+    //菜单配置
+    editor.customConfig.menus = [
+        'head',  // 标题
+        'bold',  // 粗体
+        'fontSize',  // 字号
+        'fontName',  // 字体
+        'italic',  // 斜体
+        'underline',  // 下划线
+        'strikeThrough',  // 删除线
+        'foreColor',  // 文字颜色
+        'backColor',  // 背景颜色
+        'link',  // 插入链接
+        'list',  // 列表
+        'justify',  // 对齐方式
+        'quote',  // 引用
+        'emoticon',  // 表情
+        'image',  // 插入图片
+        'table',  // 表格
+        'video',  // 插入视频
+        'code',  // 插入代码
+        'undo',  // 撤销
+        'redo'  // 重复
+    ];
+    // 关闭粘贴样式的过滤
+    editor.customConfig.pasteFilterStyle = false;
+    // 忽略粘贴内容中的图片
+    editor.customConfig.pasteIgnoreImg = true;
+    editor.create();
+    //设置内容
+    editor.txt.html('<p>用 JS 设置的内容</p>');
+    //清空内容
+    editor.txt.clear();
+    //获取内容
+    document.getElementById('btn1').addEventListener('click', function () {
+        // 读取 html
+        alert(editor.txt.html())
+    }, false);
+
+    document.getElementById('btn2').addEventListener('click', function () {
+        // 读取 text
+        alert(editor.txt.text())
+    }, false)
+</script>
+<script type="text/javascript">
+    trim = function(str){
+        var string='';
+        var arr = [];
+        for(var i=0;i<str.length;i++){
+            if(str.charCodeAt(i) == 32||str.charCodeAt(i) == 12288){
+                continue;
+            }else{
+                arr.push(str[i]);
+            }
+        }
+        return string = arr.join('');
+    }
+    $(function () {
+        //绑定提交按钮
+        $("#submit").bind('click',function () {
+            //1.校验表单
+            var title = trim($('#title').val());
+            if(title.length ==0 ){
+                alert("标题不能为空！")
+            }
+            //2.ajax请求
+            var type = $("#type").val();
+            var description = editor.txt.html();
+            $.ajax({
+                type:"post",
+                data:{title:title,type:type,description:description},
+                dataType:'JSON',
+                async:true,
+                url:"manageProcessFileUpdate.act",
+                success:function (data) {
+                    if(data.code == "0"){
+                        //添加成功
+                        alert(data.msg);
+                        //todo:跳转至使用页面
+                    }else if(data.code == "1"){
+                        alert(data.msg);
+                    }
+                }
+            });
+        })
+
+
+    })
+</script>
+</body>
+</html>

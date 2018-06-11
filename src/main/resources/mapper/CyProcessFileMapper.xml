@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iflytek.processfile.dao.CyProcessFileMapper">
+  <resultMap id="BaseResultMap" type="com.iflytek.processfile.dto.CyProcessFile">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="page_view" jdbcType="INTEGER" property="pageView" />
+    <result column="praise" jdbcType="INTEGER" property="praise" />
+    <result column="del_flag" jdbcType="CHAR" property="delFlag" />
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.iflytek.processfile.dto.CyProcessFile">
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uid, title, start_time, update_user, update_time, url, type, page_view, praise,
+    del_flag,description
+  </sql>
+  <sql id="Blob_Column_List">
+    description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cy_process_file
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cy_process_file
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.iflytek.processfile.dto.CyProcessFile">
+    insert into cy_process_file (id, uid, title,
+      start_time, update_user, update_time,
+      url, type, page_view, praise,
+      del_flag, description)
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR},
+      #{startTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+      #{url,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, #{pageView,jdbcType=INTEGER}, #{praise,jdbcType=INTEGER},
+      #{delFlag,jdbcType=CHAR}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iflytek.processfile.dto.CyProcessFile">
+    insert into cy_process_file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="pageView != null">
+        page_view,
+      </if>
+      <if test="praise != null">
+        praise,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="pageView != null">
+        #{pageView,jdbcType=INTEGER},
+      </if>
+      <if test="praise != null">
+        #{praise,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iflytek.processfile.dto.CyProcessFile">
+    update cy_process_file
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=CHAR},
+      </if>
+      <if test="pageView != null">
+        page_view = #{pageView,jdbcType=INTEGER},
+      </if>
+      <if test="praise != null">
+        praise = #{praise,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iflytek.processfile.dto.CyProcessFile">
+    update cy_process_file
+    set uid = #{uid,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      url = #{url,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      page_view = #{pageView,jdbcType=INTEGER},
+      praise = #{praise,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getList" resultMap="BaseResultMap" parameterType="com.iflytek.processfile.dto.CyProcessFile">
+    select
+    id, uid, title, start_time,DATE_FORMAT(cy_process_file.start_time,'%Y-%m-%d') startTimeString,
+    update_user,DATE_FORMAT(cy_process_file.update_time,'%Y-%m-%d') updateTimeString, update_time, url, type, page_view, praise,
+    del_flag,description
+    from cy_process_file
+    <where>
+      <if test="title != null and title != ''" >
+        title like #{title,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null and type != ''" >
+        and type = #{type,jdbcType=CHAR}
+      </if>
+      and del_flag = 0 order by page_view desc
+    </where>
+  </select>
+
+  <update id="deleteBatch" parameterType="java.util.List">
+    update cy_process_file
+    set
+    del_flag = 1,
+    update_time = #{updatetime,jdbcType=TIMESTAMP}
+    where
+    id in
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")" >
+      #{item}
+    </foreach>
+  </update>
+
+  <select id="fingByTitle" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from
+    cy_process_file
+    <where>
+      <if test="title != null and title != ''" >
+        title like #{title,jdbcType=VARCHAR}
+      </if>
+      and del_flag = 0 order by id desc
+    </where>
+  </select>
+
+  <select id="getCount" resultType="java.lang.Integer">
+        SELECT count(*) FROM cy_process_file
+  </select>
+
+  <select id="maxId" resultType="Long">
+    select id from cy_process_file order by id desc limit 0,1
+
+  </select>
+
+  <select id="getCountProcessFile" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    cy_process_file.id, uid, title, start_time,DATE_FORMAT(cy_process_file.start_time,'%Y-%m-%d') startTimeString,
+    update_user,DATE_FORMAT(cy_process_file.update_time,'%Y-%m-%d') updateTimeString, cy_process_file.update_time, url, type, page_view, praise,
+    cy_process_file.del_flag,description, cy_user.real_name
+    from cy_process_file join cy_user
+    on
+    cy_process_file.uid = cy_user.id
+    ORDER BY page_view desc LIMIT 0,#{count}
+
+  </select>
+
+    <select id="get" resultMap="BaseResultMap" parameterType="com.iflytek.processfile.dto.CyProcessFile">
+        select
+            id, uid, title, start_time,DATE_FORMAT(cy_process_file.start_time,'%Y-%m-%d') startTimeString,
+    update_user,DATE_FORMAT(cy_process_file.update_time,'%Y-%m-%d') updateTimeString, update_time, url, type, page_view, praise,
+    del_flag,description
+    from cy_process_file
+    <where>
+        <if test="title != null and title != ''" >
+            title = #{title,jdbcType=VARCHAR}
+        </if>
+        and del_flag = 0 order by id desc
+    </where>
+    </select>
+</mapper>

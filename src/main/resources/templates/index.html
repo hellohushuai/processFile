@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>流程文件首页</title>
+    <meta name="description" content="3D Book Showcase with CSS 3D Transforms"/>
+    <meta name="keywords" content="3d transforms, css3 3d, book, jquery, open book, css transitions"/>
+    <meta name="author" content="Codrops"/>
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/default.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/component.css}"/>
+    <script th:src="@{/static/js/modernizr.custom.js}"></script>
+    <!--导入bootstrap和bootstrap-table样式-->
+    <link rel="stylesheet" th:href="@{/static/bootstrap/css/bootstrap.min.css}">
+    <!--引入jQuery bootstrap bootstrap-table的js-->
+    <script th:src="@{/static/js/jquery.js}"></script>
+    <script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <!-- Codrops top bar -->
+    <!--<div class="codrops-top clearfix">-->
+    <!--<a href="http://tympanus.net/Tutorials/ItemSlider/"><strong>&laquo; Previous Demo: </strong>Simple Item Slider</a>-->
+    <!--<span class="right"><a href="http://tympanus.net/codrops/?p=13406"><strong>Back to the Codrops Article</strong></a></span>-->
+    <!--</div>-->
+    <!--/ Codrops top bar -->
+    <header class="clearfix">
+        <h1>流程文件-热搜榜</h1>
+        <nav class="codrops-demos">
+            <a class="current-demo" th:href="@{/index.act}">精品推荐</a>
+            <a th:href="@{/management.act}">更多精彩</a>
+        </nav>
+        <span class="support-note">Best doc in changyan </span>
+    </header>
+    <div class="search-processFile">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-6">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="根据标题搜索..." id="titleSearch">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="serachByTitle">搜索文件</button>
+                    </span>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+    </div>
+    <th:block th:if="${not #lists.isEmpty(processFileList)}">
+        <div class="main" id="showAll">
+            <ul class="bk-list clearfix">
+                <th:block th:each="processFile,processFileStat:${processFileList}">
+                    <li th:if="${processFileStat.odd}">
+                        <div class="bk-book book-3 bk-bookdefault">
+                            <div class="bk-front">
+                                <div class="bk-cover">
+                                    <h2>
+                                        <span th:text="${processFile.realName}">二级标题</span>
+                                        <span th:text="${processFile.title}">一级标题</span>
+                                    </h2>
+                                </div>
+                                <div class="bk-cover-back"></div>
+                            </div>
+                            <div class="bk-page">
+                                <div class="bk-content bk-content-current">
+                                    <p th:text="${processFile.description}"></p>
+                                </div>
+                                <div class="bk-content">
+                                    <p th:text="${processFile.url}"></p>
+                                </div>
+                            </div>
+                            <div class="bk-back">
+                                <p
+                                        th:text="创建时间：+${processFile.startTimeString}+ 创建人：+${processFile.realName}"></p>
+                                <p
+                                        th:text="更新时间：+${processFile.updateTimeString}+ 更新人：+${processFile.updateUser}"></p>
+                            </div>
+                            <div class="bk-right"></div>
+                            <div class="bk-left">
+                                <h2>
+                                    <span th:text="${processFile.realName}">二级标题</span>
+                                    <span th:text="${processFile.title}">一级标题</span>
+                                </h2>
+                            </div>
+                            <div class="bk-top"></div>
+                            <div class="bk-bottom"></div>
+                        </div>
+                        <div class="bk-info">
+                            <button class="bk-bookback">翻转</button>
+                            <button class="bk-bookview">打开预览</button>
+                            <h3>
+                                <span th:text="${processFile.realName}">二级标题</span>
+                                <span th:text="${processFile.title}">一级标题</span>
+                            </h3>
+                            <!--<p th:text="详情请直接点击链接+${processFile.url}"></p>-->
+                            <a th:href="@{${processFile.url}}">传送门</a>
+                        </div>
+                    </li>
+                    <li th:if="${processFileStat.even}">
+                        <div class="bk-book book-1 bk-bookdefault">
+                            <div class="bk-front">
+                                <div class="bk-cover">
+                                    <h2>
+                                        <span th:text="${processFile.realName}">二级标题</span>
+                                        <span th:text="${processFile.title}">一级标题</span>
+                                    </h2>
+                                </div>
+                                <div class="bk-cover-back"></div>
+                            </div>
+                            <div class="bk-page">
+                                <div class="bk-content bk-content-current">
+                                    <p th:text="${processFile.description}"></p>
+                                </div>
+                                <div class="bk-content">
+                                    <p th:text="${processFile.url}"></p>
+                                </div>
+                            </div>
+                            <div class="bk-back">
+                                <p
+                                        th:text="创建时间：+${processFile.startTimeString}+ 创建人：+${processFile.realName}"></p>
+                                <p
+                                        th:text="更新时间：+${processFile.updateTimeString}+ 更新人：+${processFile.updateUser}"></p>
+                            </div>
+                            <div class="bk-right"></div>
+                            <div class="bk-left">
+                                <h2>
+                                    <span th:text="${processFile.realName}">二级标题</span>
+                                    <span th:text="${processFile.title}">一级标题</span>
+                                </h2>
+                            </div>
+                            <div class="bk-top"></div>
+                            <div class="bk-bottom"></div>
+                        </div>
+                        <div class="bk-info">
+                            <button class="bk-bookback">翻转</button>
+                            <button class="bk-bookview">打开预览</button>
+                            <h3>
+                                <span th:text="${processFile.realName}">二级标题</span>
+                                <span th:text="${processFile.title}">一级标题</span>
+                            </h3>
+                            <!--<p th:text="详情请直接点击链接+${processFile.url}"></p>-->
+                            <a th:href="@{${processFile.url}}">传送门</a>
+                        </div>
+                    </li>
+                </th:block>
+            </ul>
+        </div>
+    </th:block>
+</div>
+<!-- /container -->
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
+<script th:src="@{/static/js/jquery.js}"></script>
+<script th:src="@{/static/js/books1.js}"></script>
+<script>
+    $(function () {
+        Books.init();
+        $("#serachByTitle").click(function () {
+            var searchTitle = $("#titleSearch").val();
+            window.location.href="http://localhost:8080/processfile/getProcessFileByTitle?title="+searchTitle;
+        })
+
+    });
+</script>
+</body>
+</html>

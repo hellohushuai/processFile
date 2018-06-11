@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <!-- Title and other stuffs -->
+    <title>Mac风格响应式后台管理模版演示 - 源码之家</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="">
+    <!-- Stylesheets -->
+    <link th:href="@{/static/management/style/bootstrap.css}" rel="stylesheet">
+    <!-- Font awesome icon -->
+    <link rel="stylesheet" th:href="@{/static/management/style/font-awesome.css}">
+    <!-- jQuery UI -->
+    <link rel="stylesheet" th:href="@{/static/management/style/jquery-ui.css}">
+    <!-- Calendar -->
+    <link rel="stylesheet" th:href="@{/static/management/style/fullcalendar.css}">
+    <!-- prettyPhoto -->
+    <link rel="stylesheet" th:href="@{/static/management/style/prettyPhoto.css}">
+    <!-- Star rating -->
+    <link rel="stylesheet" th:href="@{/static/management/style/rateit.css}">
+    <!-- Date picker -->
+    <link rel="stylesheet" th:href="@{/static/management/style/bootstrap-datetimepicker.min.css}">
+    <!-- CLEditor -->
+    <link rel="stylesheet" th:href="@{/static/management/style/jquery.cleditor.css}">
+    <!-- Uniform -->
+    <link rel="stylesheet" th:href="@{/static/management/style/uniform.default.css}">
+    <!-- Bootstrap toggle -->
+    <link rel="stylesheet" th:href="@{/static/management/style/bootstrap-switch.css}">
+    <!-- Main stylesheet -->
+    <link th:href="@{/static/management/style/style.css}" rel="stylesheet">
+    <!-- Widgets stylesheet -->
+    <link th:href="@{/static/management/style/widgets.css}" rel="stylesheet">
+
+    <!-- HTML5 Support for IE -->
+    <!--[if lt IE 9]>
+    <script th:src="@{/static/management/js/html5shim.js}"></script>
+    <![endif]-->
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{static/management/img/favicon/favicon.png}">
+</head>
+
+<body>
+
+
+<!-- Header starts -->
+<header>
+    <div class="container">
+        <div class="row">
+
+            <!-- Logo section -->
+            <div class="col-md-4">
+                <!-- Logo. -->
+                <div class="logo">
+                    <h1><a href="#">流程文件<span class="bold"></span></a></h1>
+                    <p class="meta"> 后台管理系统</p>
+                </div>
+                <!-- Logo ends -->
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<!-- Header ends -->
+
+<!-- Main content starts -->
+
+<div class="content">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-dropdown"><a href="#">导航</a></div>
+
+        <!--- Sidebar navigation -->
+        <!-- If the main navigation has sub navigation, then add the class "has_sub" to "li" of main navigation. -->
+        <ul id="nav">
+            <!-- Main menu with font awesome icon -->
+            <li><a href="management.act" class="open"><i class="icon-home"></i> 首页</a>
+                <!-- Sub menu markup
+                <ul>
+                  <li><a href="#">Submenu #1</a></li>
+                  <li><a href="#">Submenu #2</a></li>
+                  <li><a href="#">Submenu #3</a></li>
+                </ul>-->
+            </li>
+            <li class="has_sub"><a href="#"><i class="icon-list-alt"></i> 创建流程文件 <span class="pull-right"><i
+                    class="icon-chevron-right"></i></span></a>
+                <ul>
+                    <li><a href="widgets1.html">插件页面 #1</a></li>
+                    <li><a href="widgets2.html">插件页面 #2</a></li>
+                    <li><a href="widgets3.html">插件页面 #3</a></li>
+                </ul>
+            </li>
+            <li class="has_sub"><a><i class="icon-file-alt"></i> 修改流程文件 <span
+                    class="pull-right"><i
+                    class="icon-chevron-right"></i></span></a>
+                <ul>
+                    <li><a th:href="@{/processFileList.act}">表单Post</a></li>
+                    <li><a href="login.html">登录页</a></li>
+                    <li><a href="register.html">注册页面</a></li>
+                    <li><a href="support.html">帮助页</a></li>
+                    <li><a href="invoice.html">购物清单</a></li>
+                    <li><a href="profile.html">个人资料</a></li>
+                    <li><a href="gallery.html">相册页面</a></li>
+                </ul>
+            </li>
+            <li class="has_sub"><a href="#"><i class="icon-file-alt"></i> 页面模块2  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
+                <ul>
+                    <li><a href="media.html">媒体</a></li>
+                    <li><a href="statement.html">描述</a></li>
+                    <li><a href="error.html">错误</a></li>
+                    <li><a href="error-log.html">错误日志</a></li>
+                    <li><a href="calendar.html">日历</a></li>
+                    <li><a href="grid.html">网格</a></li>
+                </ul>
+            </li>
+            <li><a href="charts.html"><i class="icon-bar-chart"></i>图表</a></li>
+            <li><a href="tables.html"><i class="icon-table"></i>表格</a></li>
+            <li><a href="forms.html"><i class="icon-tasks"></i>表单</a></li>
+            <li><a href="ui.html"><i class="icon-magic"></i>UI图标</a></li>
+            <li><a href="calendar.html"><i class="icon-calendar"></i>日历</a></li>
+        </ul>
+    </div>
+
+    <!-- Sidebar ends -->
+
+    <!-- Main bar -->
+    <div class="mainbar">
+
+        <!-- Page heading -->
+        <div class="page-head">
+            <h2 class="pull-left"><i class="icon-home"></i> 首页</h2>
+
+            <!-- Breadcrumb -->
+            <div class="bread-crumb pull-right">
+                <a href="/management.act"><i class="icon-home"></i> 首页</a>
+                <!-- Divider -->
+                <span class="divider">/</span>
+                <a href="#" class="bread-current">控制台</a>
+            </div>
+
+            <div class="clearfix"></div>
+
+        </div>
+        <!-- Page heading ends -->
+
+
+
+        <!-- Matter -->
+
+        <div class="matter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="widget">
+                            <div class="widget-head">
+                                <div class="pull-left">黑色图表</div>
+                                <div class="widget-icons pull-right">
+                                    <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                                    <a href="#" class="wclose"><i class="icon-remove"></i></a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="widget-content">
+                                <div class="padd">
+                                    <div  id="hushuai"  style="width: 600px;height:400px;">
+
+                                    </div>
+                                    <!--<div id="bar-chart"></div>-->
+
+                                </div>
+                                <div class="widget-foot">
+                                    <!-- Footer goes here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="widget">
+                            <div class="widget-head">
+                                <div class="pull-left">快速提交</div>
+                                <div class="widget-icons pull-right">
+                                    <a href="#" class="wminimize"><i class="icon-chevron-up"></i></a>
+                                    <a href="#" class="wclose"><i class="icon-remove"></i></a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="widget-content">
+                                <div class="padd">
+
+                                    <div class="form quick-post">
+                                        <!-- Edit profile form (not working)-->
+                                        <form class="form-horizontal">
+                                            <!-- Title -->
+                                            <div class="form-group">
+                                                <label class="control-label col-lg-3" for="title">Title</label>
+                                                <div class="col-lg-9">
+                                                    <input type="text" class="form-control" id="title">
+                                                </div>
+                                            </div>
+                                            <!-- Content -->
+                                            <div class="form-group">
+                                                <label class="control-label col-lg-3" for="content">Content</label>
+                                                <div class="col-lg-9">
+                                                    <textarea class="form-control" id="content"></textarea>
+                                                </div>
+                                            </div>
+                                            <!-- Cateogry -->
+                                            <div class="form-group">
+                                                <label class="control-label col-lg-3">Category</label>
+                                                <div class="col-lg-9">
+                                                    <select class="form-control">
+                                                        <option value="">- Choose Cateogry -</option>
+                                                        <option value="1">General</option>
+                                                        <option value="2">News</option>
+                                                        <option value="3">Media</option>
+                                                        <option value="4">Funny</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- Tags -->
+                                            <div class="form-group">
+                                                <label class="control-label col-lg-3" for="tags">Tags</label>
+                                                <div class="col-lg-9">
+                                                    <input type="text" class="form-control" id="tags">
+                                                </div>
+                                            </div>
+
+                                            <!-- Buttons -->
+                                            <div class="form-group">
+                                                <!-- Buttons -->
+                                                <div class="col-lg-offset-2 col-lg-9">
+                                                    <button type="submit" class="btn btn-success">Publish</button>
+                                                    <button type="submit" class="btn btn-danger">Save Draft</button>
+                                                    <button type="reset" class="btn btn-default">Reset</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+
+                                </div>
+                                <div class="widget-foot">
+                                    <!-- Footer goes here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Graph starts -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div></div>
+                    </div>
+
+                </div>
+                <!-- Dashboard graph ends -->
+
+            </div>
+        </div>
+
+        <!-- Matter ends -->
+
+    </div>
+
+    <!-- Mainbar ends -->
+    <div class="clearfix"></div>
+
+</div>
+<!-- Content ends -->
+
+<!-- Footer starts -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Copyright info -->
+                <p class="copy">Copyright &copy; 2012 | <a href="#">Your Site</a> </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Footer ends -->
+
+<!-- Scroll to top -->
+<span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span>
+
+<!-- JS -->
+<script th:src="@{/static/management/js/jquery.js}"></script> <!-- jQuery -->
+<script th:src="@{/static/management/js/bootstrap.js}"></script> <!-- Bootstrap -->
+<script th:src="@{/static/management/js/jquery-ui-1.9.2.custom.min.js}"></script> <!-- jQuery UI -->
+<script th:src="@{/static/management/js/fullcalendar.min.js}"></script> <!-- Full Google Calendar - Calendar -->
+<script th:src="@{/static/management/js/jquery.rateit.min.js}"></script> <!-- RateIt - Star rating -->
+<script th:src="@{/static/management/js/jquery.prettyPhoto.js}"></script> <!-- prettyPhoto -->
+
+<!-- jQuery Flot -->
+<script th:src="@{/static/management/js/excanvas.min.js}"></script>
+<script th:src="@{/static/management/js/jquery.flot.js}"></script>
+<script th:src="@{/static/management/js/jquery.flot.resize.js}"></script>
+<script th:src="@{/static/management/js/jquery.flot.pie.js}"></script>
+<script th:src="@{/static/management/js/jquery.flot.stack.js}"></script>
+
+<!-- jQuery Notification - Noty -->
+<script th:src="@{/static/management/js/jquery.noty.js}"></script> <!-- jQuery Notify -->
+<script th:src="@{/static/management/js/themes/default.js}"></script> <!-- jQuery Notify -->
+<script th:src="@{/static/management/js/layouts/bottom.js}"></script> <!-- jQuery Notify -->
+<script th:src="@{/static/management/js/layouts/topRight.js}"></script> <!-- jQuery Notify -->
+<script th:src="@{/static/management/js/layouts/top.js}"></script> <!-- jQuery Notify -->
+<!-- jQuery Notification ends -->
+
+<script th:src="@{/static/management/js/sparklines.js}"></script> <!-- Sparklines -->
+<script th:src="@{/static/management/js/jquery.cleditor.min.js}"></script> <!-- CLEditor -->
+<script th:src="@{/static/management/js/bootstrap-datetimepicker.min.js}"></script> <!-- Date picker -->
+<script th:src="@{/static/management/js/jquery.uniform.min.js}"></script> <!-- jQuery Uniform -->
+<script th:src="@{/static/management/js/bootstrap-switch.min.js}"></script> <!-- Bootstrap Toggle -->
+<script th:src="@{/static/management/js/filter.js}"></script> <!-- Filter for support page -->
+<script th:src="@{/static/management/js/custom.js}"></script> <!-- Custom codes -->
+<script th:src="@{/static/management/js/charts.js}"></script> <!-- Charts & Graphs -->
+<script th:src="@{/static/bootstrap/js/echarts.js}"></script><!-- echarts-->
+<script th:src="@{/static/bootstrap/js/vintage.js}"></script>
+<!-- Script for this page -->
+
+<script type="text/javascript">
+    $(function () {
+
+        /* Bar Chart starts */
+
+        var d1 = [];
+        for (var i = 0; i <= 20; i += 1)
+            d1.push([i, parseInt(Math.random() * 30)]);
+
+        var d2 = [];
+        for (var i = 0; i <= 20; i += 1)
+            d2.push([i, parseInt(Math.random() * 30)]);
+
+
+        var stack = 0, bars = true, lines = false, steps = false;
+
+        function plotWithOptions() {
+            $.plot($("#bar-chart"), [ d1, d2 ], {
+                series: {
+                    stack: stack,
+                    lines: { show: lines, fill: true, steps: steps },
+                    bars: { show: bars, barWidth: 0.8 }
+                },
+                grid: {
+                    borderWidth: 0, hoverable: true, color: "#777"
+                },
+                colors: ["#ff6c24", "#ff2424"],
+                bars: {
+                    show: true,
+                    lineWidth: 0,
+                    fill: true,
+                    fillColor: { colors: [ { opacity: 0.9 }, { opacity: 0.8 } ] }
+                }
+            });
+        }
+
+        plotWithOptions();
+
+        $(".stackControls input").click(function (e) {
+            e.preventDefault();
+            stack = $(this).val() == "With stacking" ? true : null;
+            plotWithOptions();
+        });
+        $(".graphControls input").click(function (e) {
+            e.preventDefault();
+            bars = $(this).val().indexOf("Bars") != -1;
+            lines = $(this).val().indexOf("Lines") != -1;
+            steps = $(this).val().indexOf("steps") != -1;
+            plotWithOptions();
+        });
+
+        /* Bar chart ends */
+
+    });
+
+
+    /* Curve chart starts */
+
+    $(function () {
+        var sin = [], cos = [];
+        for (var i = 0; i < 14; i += 0.5) {
+            sin.push([i, Math.sin(i)]);
+            cos.push([i, Math.cos(i)]);
+        }
+
+        var plot = $.plot($("#curve-chart"),
+            [ { data: sin, label: "sin(x)"}, { data: cos, label: "cos(x)" } ], {
+                series: {
+                    lines: { show: true, fill: true},
+                    points: { show: true }
+                },
+                grid: { hoverable: true, clickable: true, borderWidth:0 },
+                yaxis: { min: -1.2, max: 1.2 },
+                colors: ["#1eafed", "#1eafed"]
+            });
+
+        function showTooltip(x, y, contents) {
+            $('<div id="tooltip">' + contents + '</div>').css( {
+                position: 'absolute',
+                display: 'none',
+                top: y + 5,
+                left: x + 5,
+                border: '1px solid #000',
+                padding: '2px 8px',
+                color: '#ccc',
+                'background-color': '#000',
+                opacity: 0.9
+            }).appendTo("body").fadeIn(200);
+        }
+
+        var previousPoint = null;
+        $("#curve-chart").bind("plothover", function (event, pos, item) {
+            $("#x").text(pos.x.toFixed(2));
+            $("#y").text(pos.y.toFixed(2));
+
+            if ($("#enableTooltip:checked").length > 0) {
+                if (item) {
+                    if (previousPoint != item.dataIndex) {
+                        previousPoint = item.dataIndex;
+
+                        $("#tooltip").remove();
+                        var x = item.datapoint[0].toFixed(2),
+                            y = item.datapoint[1].toFixed(2);
+
+                        showTooltip(item.pageX, item.pageY,
+                            item.series.label + " of " + x + " = " + y);
+                    }
+                }
+                else {
+                    $("#tooltip").remove();
+                    previousPoint = null;
+                }
+            }
+        });
+
+        $("#curve-chart").bind("plotclick", function (event, pos, item) {
+            if (item) {
+                $("#clickdata").text("You clicked point " + item.dataIndex + " in " + item.series.label + ".");
+                plot.highlight(item.series, item.datapoint);
+            }
+        });
+
+    });
+
+
+    var myChart = echarts.init(document.getElementById('hushuai'));
+
+    var xAxisData = [];
+    var data1 = [];
+    var data2 = [];
+    for (var i = 0; i < 100; i++) {
+        xAxisData.push('类目' + i);
+        data1.push((Math.sin(i / 5) * (i / 5 -10) + i / 6) * 5);
+        data2.push((Math.cos(i / 5) * (i / 5 -10) + i / 6) * 5);
+    }
+
+    option = {
+        title: {
+            text: '柱状图动画延迟'
+        },
+        legend: {
+            data: ['bar', 'bar2'],
+            align: 'left'
+        },
+        toolbox: {
+            // y: 'bottom',
+            feature: {
+                magicType: {
+                    type: ['stack', 'tiled']
+                },
+                dataView: {},
+                saveAsImage: {
+                    pixelRatio: 2
+                }
+            }
+        },
+        tooltip: {},
+        xAxis: {
+            data: xAxisData,
+            silent: false,
+            splitLine: {
+                show: false
+            }
+        },
+        yAxis: {
+        },
+        series: [{
+            name: 'bar',
+            type: 'bar',
+            data: data1,
+            animationDelay: function (idx) {
+                return idx * 10;
+            }
+        }, {
+            name: 'bar2',
+            type: 'bar',
+            data: data2,
+            animationDelay: function (idx) {
+                return idx * 10 + 100;
+            }
+        }],
+        animationEasing: 'elasticOut',
+        animationDelayUpdate: function (idx) {
+            return idx * 5;
+        }
+    };
+    myChart.setOption(option);
+
+
+    /*访问后台数据异步请求获取对应数据*/
+    /*$.get('data.json').done(function (data) {
+        // 填入数据
+        myChart.setOption({
+            xAxis: {
+                data: data.categories
+            },
+            series: [{
+                // 根据名字对应到相应的系列
+                name: '销量',
+                data: data.data
+            }]
+        });
+    });*/
+
+</script>
+</body>
+</html>
