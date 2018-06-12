@@ -100,15 +100,15 @@
     //清空内容
     // editor.txt.clear();
     //获取内容
-    document.getElementById('btn1').addEventListener('click', function () {
-        // 读取 html
-        alert(editor.txt.html())
-    }, false);
-
-    document.getElementById('btn2').addEventListener('click', function () {
-        // 读取 text
-        alert(editor.txt.text())
-    }, false)
+    // document.getElementById('btn1').addEventListener('click', function () {
+    //     // 读取 html
+    //     alert(editor.txt.html())
+    // }, false);
+    //
+    // document.getElementById('btn2').addEventListener('click', function () {
+    //     // 读取 text
+    //     alert(editor.txt.text())
+    // }, false)
 </script>
 <script type="text/javascript">
     trim = function(str){
@@ -130,6 +130,12 @@
             var title = trim($('#title').val());
             if(title.length ==0 ){
                 alert("标题不能为空！")
+                return;
+            }
+            console.info($("#allowCheck").is(":checked"));
+            if(!$("#allowCheck").is(":checked")){
+                alert("请阅读须知,并勾选!")
+                return;
             }
             //2.ajax请求
             var type = $("#type").val();

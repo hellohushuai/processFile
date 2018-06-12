@@ -157,13 +157,8 @@
             //初始化页面上面的按钮事件
 			//添加按钮
 			$("#btn_add").bind("click",function () {
-                var selectData= $('#tb_departments').bootstrapTable('getSelections');
+                window.location.href="addProcessFile.act";
 
-                if(selectData.length==1){
-
-                    console.log(selectData[0].id);
-
-                }else{alert("请选中一行")}
             })
 			//删除按钮
             $("#btn_delete").bind("click",function () {

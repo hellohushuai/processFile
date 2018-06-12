@@ -48,7 +48,6 @@
             <label class="control-label col-lg-1">内容</label>
             <div class="col-lg-8 col-md-8" id="editor">
             </div>
-            <h1 th:text="${curProcessFile.description}"></h1>
             <!--<button id="btn1">获取html</button>-->
             <!--<button id="btn2">获取text</button>-->
         </div>
@@ -57,16 +56,21 @@
             <div class="col-lg-5 col-md-6 col-lg-offset-1 col-md-offset-1">
             <span class="help-block">请确定已经按照规定的格式填写完成</span>
             <label class="checkbox">
-                <input type="checkbox"/> 勾选同意
+                <input type="checkbox" id="allowCheck"/> 勾选同意
             </label>
             <a id="submit" class="btn">提交</a>
             </div>
         </div>
     </div>
 </form>
-
 <script type="text/javascript">
-    var curDescription = "[[${curProcessFile.description}]]";
+    function escape2Html(str) {
+        var arrEntities={'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"'};
+        return str.replace(/&(lt|gt|nbsp|amp|quot);/ig,function(all,t){return arrEntities[t];});
+    }
+</script>
+<script type="text/javascript">
+    var curDescription = escape2Html("[[${curProcessFile.description}]]");
     var E = window.wangEditor;
     var editor = new E('#editor');
     //菜单配置
@@ -99,7 +103,7 @@
     editor.create();
     //设置内容
     // editor.txt.html('curDescription');
-    editor.txt.html('<p>33311</p><p><span style="font-weight: bold;">dsadsa d</span><br></p>');
+    editor.txt.html(curDescription);
     //清空内容
     // editor.txt.clear();
     //获取内容
@@ -133,7 +137,13 @@
             var title = trim($('#title').val());
             if(title.length ==0 ){
                 alert("标题不能为空！")
+                return;
             }
+            if(!$("#allowCheck").is(":checked")){
+                alert("请阅读须知,并勾选!")
+                return;
+            }
+
             //2.ajax请求
             var type = $("#type").val();
             var description = editor.txt.html();
@@ -159,5 +169,6 @@
 
     })
 </script>
+
 </body>
 </html>
