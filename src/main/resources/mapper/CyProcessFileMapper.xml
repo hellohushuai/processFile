@@ -251,6 +251,9 @@
         <if test="title != null and title != ''" >
             title = #{title,jdbcType=VARCHAR}
         </if>
+      <if test="id != null and id != ''" >
+        id = #{id,jdbcType=BIGINT}
+      </if>
         and del_flag = 0 order by id desc
     </where>
     </select>

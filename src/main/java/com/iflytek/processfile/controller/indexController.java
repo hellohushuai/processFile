@@ -47,5 +47,14 @@ public class indexController extends BaseController {
     }
 
     @RequestMapping("addProcessFile.act")
-    public String addProcessFile(){return "addProcessFile.html";}
+    public String addProcessFile(){
+        return "addProcessFile.html";
+    }
+
+    @RequestMapping("updateProcessFile.act")
+    public String updateProcessFile(CyProcessFile cyProcessFile,Model model){
+        CyProcessFile curProcessFile = cyProcessFileService.get(cyProcessFile);
+        model.addAttribute("curProcessFile",curProcessFile);
+        return "updateProcessFile.html";
+    }
 }

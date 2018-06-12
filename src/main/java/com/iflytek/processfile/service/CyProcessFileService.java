@@ -181,6 +181,9 @@ public class CyProcessFileService  {
         CyProcessFile processFile = null;
         try {
             processFile = cyProcessFileMapper.get(cyProcessFile);
+            processFile.setTitle(XSSUtils.stripHtml(processFile.getTitle()));
+//            processFile.setDescription(XSSUtils.stripHtml(processFile.getDescription()));
+
         } catch (Exception e) {
             e.printStackTrace();
         }

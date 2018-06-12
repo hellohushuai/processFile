@@ -190,7 +190,7 @@
                 var selectData= $('#tb_departments').bootstrapTable('getSelections');
 
                 if(selectData.length==1){
-
+                    window.location.href="updateProcessFile.act?id="+selectData[0].id;
                     console.log(selectData[0].id);
 
                 }else{alert("请选中一行")}
