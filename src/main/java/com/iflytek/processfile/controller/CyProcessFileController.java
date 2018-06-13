@@ -93,7 +93,7 @@ public class CyProcessFileController extends BaseController {
             }
             return this.result("1","删除失败，请联系管理员");
         }else {
-            return this.result("1","请选择要删除的权限");
+            return this.result("1","请选择要删除的文件");
         }
 
     }
