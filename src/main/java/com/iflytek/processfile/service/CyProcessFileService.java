@@ -254,11 +254,14 @@ public class CyProcessFileService  {
         //获取当前用户
 //        CyUser currentUser = this.getCurrentUser();
         CyUser currentUser = new CyUser();
-        currentUser.setId(1234L);
+        currentUser.setId(32L);
         if (StringUtils.isBlank(cyProcessFile.getTitle())) {
             return this.result("1","流程文件标题不能为空！！");
         }
-        CyProcessFile cyProcessFile1 = (CyProcessFile) this.fingByTitle(cyProcessFile.getTitle());
+        CyProcessFile cyProcessFile2 = new CyProcessFile();
+        cyProcessFile2.setId(cyProcessFile.getId());
+        CyProcessFile cyProcessFile1 = this.get(cyProcessFile2);
+
         if (cyProcessFile1 == null) {
             //得到当前域名
             StringBuffer url = request.getRequestURL();
