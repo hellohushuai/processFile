@@ -57,4 +57,9 @@ public class indexController extends BaseController {
         model.addAttribute("curProcessFile",curProcessFile);
         return "updateProcessFile.html";
     }
+
+    @RequestMapping("processFileDemo.act")
+    public String processFileDemo(){
+        return "processFileDemo.html";
+    }
 }
